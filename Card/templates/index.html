@@ -7,7 +7,7 @@
         <div class="card">
             <div class="left-container">
                 <img src="{% static personal_info.profile_pic %}" alt="Profile Image">
-                <h2 class="gradienttext">{{ personal_info.first_name }} {{ personal_info.last_name }}</h2>
+                <h2 class="gradienttext">{{ personal_info.full_name }}</h2>
                 <p>{{ personal_info.job_field }}</p>
             </div>
             <div class="right-container">
@@ -19,7 +19,7 @@
                     </tr>
                     <tr>
                         <td>Age :</td>
-                        <td>{{ personal_info.birth_date }}</td>
+                        <td>{{ personal_info.age }}</td>
                     </tr>
                     <tr>
                         <td>Mobile :</td>

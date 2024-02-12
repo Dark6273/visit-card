@@ -1,5 +1,9 @@
-from django.db import models
+import os
+from glob import glob
+from pathlib import Path
+
 from PIL import Image
+from django.db import models
 
 
 class PersonalInfo(models.Model):
@@ -18,11 +22,20 @@ class PersonalInfo(models.Model):
     telegram = models.URLField(null=True, blank=True)
     website = models.URLField(null=True, blank=True)
 
+    def delete_older_profile_pic(self):
+        parent_path = Path(self.profile_pic.path).parent
+        images = glob("{}/*.png".format(parent_path))
+        images.extend(glob("{}/*.jpg".format(parent_path)))
+
+        for image in images:
+            os.remove(image)
+
     def save(self, *args, **kwargs):
         super(PersonalInfo, self).save(*args, **kwargs)
 
         if self.profile_pic:
             with Image.open(self.profile_pic.path) as img:
                 image = img.resize((200, 200))
-                image.save(self.profile_pic.path)
 
+                self.delete_older_profile_pic()
+                image.save(self.profile_pic.path, quality=90)
