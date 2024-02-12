@@ -1,7 +1,7 @@
 from django.db import models
+from PIL import Image
 
 
-# Create your models here.
 class PersonalInfo(models.Model):
     first_name = models.CharField(max_length=10)
     last_name = models.CharField(max_length=10)
@@ -17,3 +17,12 @@ class PersonalInfo(models.Model):
     linkedin = models.URLField(null=True, blank=True)
     telegram = models.URLField(null=True, blank=True)
     website = models.URLField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        super(PersonalInfo, self).save(*args, **kwargs)
+
+        if self.profile_pic:
+            with Image.open(self.profile_pic.path) as img:
+                image = img.resize((200, 200))
+                image.save(self.profile_pic.path)
+
