@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<section>
+    <div class="card1">
+        <div class="card">
+            <div class="left-container">
+                <img src="{% static personal_info.profile_pic %}" alt="Profile Image">
+                <h2 class="gradienttext">{{ personal_info.first_name }} {{ personal_info.last_name }}</h2>
+                <p>{{ personal_info.job_field }}</p>
+            </div>
+            <div class="right-container">
+                <h3 class="gradienttext">Profile Details</h3>
+                <table>
+                    <tr>
+                        <td>Name :</td>
+                        <td>{{ personal_info.first_name }} {{ personal_info.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Age :</td>
+                        <td>{{ personal_info.birth_date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Mobile :</td>
+                        <td><a href="tel:{{ personal_info.phone_number }}">{{ personal_info.phone_number }}</a></td>
+                    </tr>
+                    <tr>
+                        <td>Email :</td>
+                        <td><a href="mailto:{{ personal_info.email }}">{{ personal_info.email }}</a></td>
+                    </tr>
+                    <tr>
+                        <td>Address :</td>
+                        <td>{{ personal_info.address }}</td>
+                    </tr>
+                </table>
+                <div class="social-icons">
+                    <a href="{{ personal_info.website }}" target="_blank"><i class="fa fa-book"></i></a>
+                    <a href="{{ personal_info.telegram }}" target="_blank"><i class="fa fa-telegram"></i></a>
+                    <a href="{{ personal_info.linkedin }}" target="_blank"><i class="fa fa-linkedin"></i></a>
+                    <a href="{{ personal_info.github }}" target="_blank"><i class="fa fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
